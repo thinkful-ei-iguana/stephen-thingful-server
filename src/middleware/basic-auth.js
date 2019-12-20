@@ -1,4 +1,3 @@
-const bcrypt = require('bcryptjs')
 const AuthService = require('../auth/auth-service')
 
 function requireAuth(req, res, next) {
@@ -39,7 +38,7 @@ function requireAuth(req, res, next) {
           })
       }
 
-      return bcrypt.compare(tokenPassword, user.password)
+      return AuthService.comparePasswords(tokenPassword, user.password)
         .then(passwordsMatch => {
           if (!passwordsMatch) {
             return res
